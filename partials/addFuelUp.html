@@ -1,0 +1,43 @@
+<hgroup>
+    <h5 >Hello <span ng-bind="name">???</span>. Please add a new Fuel Up</h5>
+</hgroup>
+
+<section class="row well">
+    <form class="center" ng-submit="submit()" ng-controller="FuelUpFormCtrl">
+        <div class="control-group">
+            <div class="controls">
+                <input type="text" id="odometerInput" ng-model="fuelup.odometer" placeholder="Mileage" required />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <input type="text" name="gallons" ng-model="fuelup.gallons" placeholder="Gallons" required />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <input type="text" name="price" ng-model="fuelup.price" placeholder="PPG" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <textarea name="note" cols="30" rows="10" ng-model="fuelup.note" placeholder="Enter a Note..."></textarea>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <label class="checkbox">Partial Fuel-Up<input type="checkbox" name="partial" ng-model="fuelup.partial" /></label>
+                <label class="checkbox">Missed Fuel-Up<input type="checkbox" name="missed" ng-model="fuelup.missed" /></label>
+            </div>
+        </div>
+
+        <div class="">
+            <button class="btn-large btn-block btn-primary" type="submit">Done</button>
+        </div>
+    </form>
+</section>
+
