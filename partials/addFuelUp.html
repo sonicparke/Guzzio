@@ -2,7 +2,7 @@
     <h5 >Hello <span ng-bind="name">???</span>. Please add a new Fuel Up</h5>
 </hgroup>
 
-<section>
+<section ng-show="currentMileage">
     <ul class="unstyled">
         <li>Previous Mileage: {{previousFuelUp.odometer}}</li>
         <li>Entered Mileage: {{fuelUp.odometer}}</li>
