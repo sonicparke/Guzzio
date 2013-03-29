@@ -8,7 +8,7 @@
         <li>Entered Mileage: {{fuelUp.odometer}}</li>
         <li>Gallons Entered: {{fuelUp.gallons}}</li>
         <li>Miles Driven: {{milesDriven}}</li>
-        <li>You got <strong>{{currentMileage}}</strong> mpg</li>
+        <li>It cost you <em>{{fuelUpCost | currency}}</em> and you got <strong>{{currentMileage | roundTo2}}</strong> mpg.</li>
     </ul>
 </section>
 
@@ -16,19 +16,19 @@
     <form class="center" ng-submit="submit()">
         <div class="control-group">
             <div class="controls">
-                <input type="text" id="odometerInput" ng-model="fuelUp.odometer" placeholder="Mileage" required />
+                <input class="span12" type="text" id="odometerInput" ng-model="fuelUp.odometer" placeholder="Mileage" required />
             </div>
         </div>
 
         <div class="control-group">
             <div class="controls">
-                <input type="text" name="gallons" ng-model="fuelUp.gallons" placeholder="Gallons" required />
+                <input class="span12" type="text" name="gallons" ng-model="fuelUp.gallons" placeholder="Gallons" required />
             </div>
         </div>
 
         <div class="control-group">
             <div class="controls">
-                <input type="text" name="price" ng-model="fuelUp.price" placeholder="PPG" />
+                <input class="span12" type="text" name="price" ng-model="fuelUp.price" placeholder="PPG" />
             </div>
         </div>
 
@@ -59,7 +59,7 @@
     </button>
 
         <div class="">
-            <button class="btn-large btn-block btn-primary" type="submit">Done</button>
+            <button class="btn-large btn-block btn-primary" type="submit"><i class="icon-plus-sign icon-white"></i> Add</button>
         </div>
     </form>
 </section>

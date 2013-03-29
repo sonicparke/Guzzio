@@ -20,14 +20,12 @@ app.controller('AddFuelUpCtrl', [
     $scope.name = 'Brad';
     $scope.previousFuelUp = { odometer: 1000 };
     $scope.submit = function () {
-      console.log($scope.fuelUp);
       $scope.calculate($scope.fuelUp);
     };
     $scope.calculate = function (data) {
       $scope.milesDriven = data.odometer - $scope.previousFuelUp.odometer;
-      $scope.currentMileage = $scope.milesDriven % data.gallons;
-      console.log($scope.milesDriven);
-      console.log($scope.currentMileage);
+      $scope.currentMileage = $scope.milesDriven / data.gallons;
+      $scope.fuelUpCost = data.gallons * data.price;
     };
   }
 ]);
@@ -41,3 +39,8 @@ app.controller('MainCtrl', [
     };
   }
 ]);
+app.filter('roundTo2', function () {
+  return function (num) {
+    return Math.round(num * 100) / 100;
+  };
+});

@@ -11,7 +11,6 @@ app.controller('AddFuelUpCtrl', function($scope) {
     };
 
     $scope.submit = function () {
-        console.log($scope.fuelUp);
         $scope.calculate($scope.fuelUp);
     };
 
@@ -19,12 +18,12 @@ app.controller('AddFuelUpCtrl', function($scope) {
 
         $scope.milesDriven = (data.odometer - $scope.previousFuelUp.odometer);
 
-        $scope.currentMileage = ($scope.milesDriven % data.gallons);
+        // $scope.currentMileage = ((data.odometer - $scope.previousFuelUp.odometer) / data.gallons);
+        $scope.currentMileage = ($scope.milesDriven / data.gallons);
 
-
-        console.log($scope.milesDriven);
-        console.log($scope.currentMileage);
+        $scope.fuelUpCost = (data.gallons * data.price);
 
     };
+
 
 });
