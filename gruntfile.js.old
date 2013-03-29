@@ -1,0 +1,99 @@
+module.exports = function(grunt) {
+
+  // Configuration goes here
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+
+    // Configure the copy task to move files from the development to production folders
+    // copy: {
+    //   target: {
+    //     files: {
+    //       'prod/': ['dev/*']
+    //     }
+    //   }
+    // },
+
+    // Lint the javascript
+    // lint: {
+    //   files: [
+    //     'grunt.js',
+    //     'js/**.js'
+    //     // 'prod/scripts/**.js'
+    //   ]
+    // },
+
+    // Some typical JSHint options and globals
+    // jshint: {
+    //   options: {
+    //     curly: true,
+    //     eqeqeq: true,
+    //     immed: true,
+    //     latedef: true,
+    //     newcap: true,
+    //     noarg: true,
+    //     sub: true,
+    //     undef: true,
+    //     boss: true,
+    //     eqnull: true,
+    //     browser: true
+    //   },
+    //   globals: {
+    //     jQuery: true
+    //   }
+    // },
+
+    // Zip everything up
+    // compress: {
+    //   target: {
+    //     files: {
+    //       'pack/<%= pkg.name %>.v<%= pkg.version %>.zip': ['prod/**']
+    //     }
+    //   }
+    // },
+
+
+    concat: {
+      // options: {
+      //   separator: ''
+      // },
+      dist: {
+        src: ['js/app.js', 'js/controllers.js'],
+        dest: 'js/built.js'
+      }
+    },
+
+    uglify: {
+      options: {
+        mangle: false
+      },
+      my_target: {
+        files: {
+          'js/app.min.js': ['js/built.annotate.js']
+        }
+      }
+    },
+
+    ngmin: {
+      controllers: {
+        src: ['js/controllers.js'],
+        dest: 'js/controllersOne.js'
+      }
+    }
+
+  });
+
+  // Load plugins here
+  // grunt.loadNpmTasks('grunt-contrib-copy');
+  // grunt.loadNpmTasks('grunt-contrib-jshint');
+  // grunt.loadNpmTasks('grunt-contrib-compress');
+  // grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  // grunt.loadNpmTasks('grunt-ngmin');
+
+  // Define your tasks here
+  grunt.registerTask('default', ['concat', 'uglify']);
+  grunt.registerTask('concat', ['concat']);
+  // grunt.registerTask('ngmin', ['ngmin']);
+  // grunt.version;
+
+};
