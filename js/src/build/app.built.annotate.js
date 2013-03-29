@@ -1,4 +1,4 @@
-var app = angular.module('Guzzio', []);
+var app = angular.module('Guzzio', ['ui.bootstrap']);
 app.config([
   '$routeProvider',
   function ($routeProvider) {
@@ -18,14 +18,16 @@ app.controller('AddFuelUpCtrl', [
   '$scope',
   function ($scope) {
     $scope.name = 'Brad';
-  }
-]);
-app.controller('FuelUpFormCtrl', [
-  '$scope',
-  function ($scope) {
-    $scope.fuelup = [];
+    $scope.previousFuelUp = { odometer: 1000 };
     $scope.submit = function () {
-      console.log($scope.fuelup);
+      console.log($scope.fuelUp);
+      $scope.calculate($scope.fuelUp);
+    };
+    $scope.calculate = function (data) {
+      $scope.milesDriven = data.odometer - $scope.previousFuelUp.odometer;
+      $scope.currentMileage = $scope.milesDriven % data.gallons;
+      console.log($scope.milesDriven);
+      console.log($scope.currentMileage);
     };
   }
 ]);

@@ -1,4 +1,4 @@
-var app = angular.module('Guzzio', ['ui.bootstrap']]);
+var app = angular.module('Guzzio', ['ui.bootstrap']);
 
 // app.config(['$locationProvider', function ($locationProvider){
 //   $locationProvider.html5Mode(true);
@@ -20,4 +20,4 @@ app.config(['$routeProvider', function ($routeProvider){
     reloadOnSearch: false
   });
 
-}]);
+}])

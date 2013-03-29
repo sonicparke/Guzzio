@@ -1,12 +1,30 @@
 app.controller('AddFuelUpCtrl', function($scope) {
   $scope.name = 'Brad';
-});
 
-app.controller('FuelUpFormCtrl', function($scope) {
+// $scope.fuelUp = {
+    //     partial: true,
+    //     missed: false
+    // };
 
-    $scope.fuelup = [];
-
-    $scope.submit = function() {
-        console.log($scope.fuelup);
+    $scope.previousFuelUp = {
+        odometer: 1000
     };
+
+    $scope.submit = function () {
+        console.log($scope.fuelUp);
+        $scope.calculate($scope.fuelUp);
+    };
+
+    $scope.calculate = function (data) {
+
+        $scope.milesDriven = (data.odometer - $scope.previousFuelUp.odometer);
+
+        $scope.currentMileage = ($scope.milesDriven % data.gallons);
+
+
+        console.log($scope.milesDriven);
+        console.log($scope.currentMileage);
+
+    };
+
 });

@@ -2,42 +2,66 @@
     <h5 >Hello <span ng-bind="name">???</span>. Please add a new Fuel Up</h5>
 </hgroup>
 
+<section>
+    <ul class="unstyled">
+        <li>Your MPG is: {{currentMileage}}</li>
+        <li>Previous Miles Driven: {{previousFuelUp.odometer}}</li>
+        <li>Current Miles Driven: {{fuelUp.odometer}}</li>
+        <li>Current Gallons Entered: {{fuelUp.gallons}}</li>
+    </ul>
+</section>
+
 <section class="row well">
-    <form class="center" ng-submit="submit()" ng-controller="FuelUpFormCtrl">
+    <form class="center" ng-submit="submit()">
         <div class="control-group">
             <div class="controls">
-                <input type="text" id="odometerInput" ng-model="fuelup.odometer" placeholder="Mileage" required />
+                <input type="text" id="odometerInput" ng-model="fuelUp.odometer" placeholder="Mileage" required />
             </div>
         </div>
 
         <div class="control-group">
             <div class="controls">
-                <input type="text" name="gallons" ng-model="fuelup.gallons" placeholder="Gallons" required />
+                <input type="text" name="gallons" ng-model="fuelUp.gallons" placeholder="Gallons" required />
             </div>
         </div>
 
         <div class="control-group">
             <div class="controls">
-                <input type="text" name="price" ng-model="fuelup.price" placeholder="PPG" />
+                <input type="text" name="price" ng-model="fuelUp.price" placeholder="PPG" />
             </div>
         </div>
 
-        <div class="control-group">
+       <!--  <div class="control-group">
             <div class="controls">
-                <textarea name="note" cols="30" rows="10" ng-model="fuelup.note" placeholder="Enter a Note..."></textarea>
+                <textarea name="note" cols="30" rows="10" ng-model="fuelUp.note" placeholder="Enter a Note..."></textarea>
             </div>
-        </div>
+        </div> -->
 
-        <div class="control-group">
+       <!--  <div class="control-group">
             <div class="controls">
-                <label class="checkbox">Partial Fuel-Up<input type="checkbox" name="partial" ng-model="fuelup.partial" /></label>
-                <label class="checkbox">Missed Fuel-Up<input type="checkbox" name="missed" ng-model="fuelup.missed" /></label>
+                <label class="checkbox">Partial Fuel-Up<input type="checkbox" name="partial" ng-model="fuelUp.partial" /></label>
+                <label class="checkbox">Missed Fuel-Up<input type="checkbox" name="missed" ng-model="fuelUp.missed" /></label>
             </div>
-        </div>
+        </div> -->
+
+        <!-- <div class="control-group">
+            <div class="controls">
+
+                <button type="button" class="btn btn-primary" ng-model="fuelUp.partial" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">Partial Fuel-Up</button>
+
+                <button type="button" class="btn btn-primary" ng-model="fuelUp.missed" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">Missed Fuel-Up</button>
+
+            </div>
+        </div> -->
+
+
+    </button>
 
         <div class="">
             <button class="btn-large btn-block btn-primary" type="submit">Done</button>
         </div>
     </form>
 </section>
+
+
 
