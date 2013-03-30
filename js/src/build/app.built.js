@@ -1,4 +1,4 @@
-var app = angular.module('Guzzio', ['ui.bootstrap']);
+var app = angular.module('Guzzio', ['ui.bootstrap','mongolabResourceHttp']);
 
 // app.config(['$locationProvider', function ($locationProvider){
 //   $locationProvider.html5Mode(true);
@@ -6,13 +6,22 @@ var app = angular.module('Guzzio', ['ui.bootstrap']);
 
 app.config(['$routeProvider', function ($routeProvider){
 
+
+  $routeProvider.when('/FuelUpsList', {
+    templateUrl:'partials/fuelUpsList.html',
+    controller:'FuelUpsListCtrl',
+    resolve:{
+      // Vehicles:function(Vehicles){return Vehicles.all();},
+      fuelUps:function(FuelUp){return FuelUp.all();}
+    }
+  });
   $routeProvider.when('/AddFuelUp', {
     templateUrl: 'partials/addFuelUp.html',
     controller: 'AddFuelUpCtrl',
-    reloadOnSearch: false
-    // resolve: {
-    //   checkRight: resolves.checkRights
-    //   }
+    reloadOnSearch: false,
+    resolve:{
+      fuelUp:function(FuelUp){return new FuelUp();}
+    }
   });
   $routeProvider.otherwise({
     redirectTo: '/',
@@ -20,14 +29,10 @@ app.config(['$routeProvider', function ($routeProvider){
     reloadOnSearch: false
   });
 
-}])
-app.controller('AddFuelUpCtrl', function($scope) {
-  $scope.name = 'Brad';
-
-// $scope.fuelUp = {
-    //     partial: true,
-    //     missed: false
-    // };
+}]);
+app.controller('AddFuelUpCtrl', function($scope, $location, fuelUp) {
+    $scope.name = 'Brad';
+    $scope.fuelUp = fuelUp;
 
     $scope.previousFuelUp = {
         odometer: 1000
@@ -35,26 +40,62 @@ app.controller('AddFuelUpCtrl', function($scope) {
 
     $scope.submit = function () {
         $scope.calculate($scope.fuelUp);
+        // $scope.save();
     };
-
     $scope.calculate = function (data) {
 
-        $scope.milesDriven = (data.odometer - $scope.previousFuelUp.odometer);
+        // $scope.miles = (data.odometer - $scope.previousFuelUp.odometer);
+        // $scope.mpg = ($scope.miles / data.gallons);
+        // $scope.fuelUpCost = (data.gallons * data.price);
 
-        // $scope.currentMileage = ((data.odometer - $scope.previousFuelUp.odometer) / data.gallons);
-        $scope.currentMileage = ($scope.milesDriven / data.gallons);
+        // $scope.fuelUp = {
+        //     miles: $scope.miles,
+        //     mpg: $scope.mpg,
+        //     fuelUpCost: $scope.fuelUpCost
+        // };
 
-        $scope.fuelUpCost = (data.gallons * data.price);
-
+        // console.log($scope.fuelUp);
+        $scope.save();
     };
 
+
+    // mongolabResourceHttp Stuff
+    var changeSuccess = function() {
+        $location.path('/FuelUpsList');
+    };
+
+    var changeError = function() {
+        throw new Error('Sth went wrong...');
+    };
+
+    $scope.save = function(){
+        $scope.fuelUp.$save(changeSuccess, changeSuccess, changeError, changeError);
+    };
+
+    $scope.abandonChanges = function() {
+        $location.path("/FuelUpsList");
+    };
+
+    $scope.hasChanges = function(){
+        return !angular.equals($scope.fuelUp);
+    };
+
+
+});
+app.controller('FuelUpsListCtrl', function($scope, $location, fuelUps) {
+
+    $scope.fuelUps = fuelUps;
+    console.log($scope.fuelUps);
+
+    $scope.newFuelUp = function(){
+        $location.path('/AddFuelUp');
+    };
 
 });
 app.controller('MainCtrl', function($scope, $location) {
   // console.log('Main Controller Fired');
 
   $scope.setRoute = function (route) {
-    console.log('Route Fired: ', route);
     $location.path(route);
   };
 
@@ -65,3 +106,13 @@ app.filter('roundTo2', function(){
         return Math.round(num * 100) / 100;
     };
 });
+
+app.constant('MONGOLAB_CONFIG',{API_KEY:'r0hOwANUyGVafSYyFF_KYFRCVqDizPG3', DB_NAME:'guzziodb'});
+
+app
+    .factory('FuelUp', function ($mongolabResourceHttp) {
+        return $mongolabResourceHttp('FuelUps');
+    })
+    .factory('Vehicles', function ($mongolabResourceHttp) {
+        return $mongolabResourceHttp('Vehicles');
+    });

@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       //   separator: ''
       // },
       dist: {
-        src: ['js/src/app.js', 'js/src/controllers/*.js', 'js/src/filters/*.js'],
+        src: ['js/src/app.js', 'js/src/controllers/*.js', 'js/src/filters/*.js', 'js/src/services/*.js', 'js/src/directives/*.js'],
         dest: 'js/src/build/app.built.js'
       }
     },

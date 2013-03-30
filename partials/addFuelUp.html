@@ -12,17 +12,24 @@
     </ul>
 </section>
 
-<section class="row well">
-    <form class="center" ng-submit="submit()">
+<section class="row">
+    <form ng-submit="submit()">
+
         <div class="control-group">
             <div class="controls">
-                <input class="span12" type="text" id="odometerInput" ng-model="fuelUp.odometer" placeholder="Mileage" required />
+                <input class="span12" type="text" ng-model="fuelUp.car_name" placeholder="Vehicle" value="{{fuelUp.car_name}}" />
             </div>
         </div>
 
         <div class="control-group">
             <div class="controls">
-                <input class="span12" type="text" name="gallons" ng-model="fuelUp.gallons" placeholder="Gallons" required />
+                <input class="span12" type="text" id="odometerInput" ng-model="fuelUp.odometer" placeholder="Mileage" require d />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <input class="span12" type="text" name="gallons" ng-model="fuelUp.gallons" placeholder="Gallons" require d />
             </div>
         </div>
 
@@ -60,6 +67,7 @@
 
         <div class="">
             <button class="btn-large btn-block btn-primary" type="submit"><i class="icon-plus-sign icon-white"></i> Add</button>
+            <button class="btn-large btn-block btn-cancel" ng-click="abandonChanges()" type="submit"><i class="icon-cancel icon-white"></i> Cancel</button>
         </div>
     </form>
 </section>

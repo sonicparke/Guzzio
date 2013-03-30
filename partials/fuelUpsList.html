@@ -1,0 +1,21 @@
+
+<hgroup>
+    <h5>Fuel-Ups for {{fuelUps.car_name}} the {{fuelUps.model}}.</h5>
+</hgroup>
+
+<section class="row">
+    <ul class="unstyled">
+        <li ng-repeat="item in fuelUps">{{item.mpg}}, {{item.odometer}}, {{item.miles}}, {{item.price}}, {{item.fuelUpCost}}</li>
+       <!--  <li>Previous Mileage: {{previousFuelUp.odometer}}</li>
+        <li>Entered Mileage: {{fuelUp.odometer}}</li>
+        <li>Gallons Entered: {{fuelUp.gallons}}</li>
+        <li>Miles Driven: {{milesDriven}}</li>
+        <li>It cost you <em>{{fuelUpCost | currency}}</em> and you got <strong>{{currentMileage | roundTo2}}</strong> mpg.</li> -->
+    </ul>
+</section>
+
+
+
+
+
+<button class="btn-large btn-block btn-primary" ng-click="newFuelUp()"><i class="icon-plus-sign icon-white"></i> Add New FuelUp</button>

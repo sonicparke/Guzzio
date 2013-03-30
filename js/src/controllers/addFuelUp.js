@@ -1,10 +1,6 @@
-app.controller('AddFuelUpCtrl', function($scope) {
-  $scope.name = 'Brad';
-
-// $scope.fuelUp = {
-    //     partial: true,
-    //     missed: false
-    // };
+app.controller('AddFuelUpCtrl', function($scope, $location, fuelUp) {
+    $scope.name = 'Brad';
+    $scope.fuelUp = fuelUp;
 
     $scope.previousFuelUp = {
         odometer: 1000
@@ -12,17 +8,44 @@ app.controller('AddFuelUpCtrl', function($scope) {
 
     $scope.submit = function () {
         $scope.calculate($scope.fuelUp);
+        // $scope.save();
     };
-
     $scope.calculate = function (data) {
 
-        $scope.milesDriven = (data.odometer - $scope.previousFuelUp.odometer);
+        // $scope.miles = (data.odometer - $scope.previousFuelUp.odometer);
+        // $scope.mpg = ($scope.miles / data.gallons);
+        // $scope.fuelUpCost = (data.gallons * data.price);
 
-        // $scope.currentMileage = ((data.odometer - $scope.previousFuelUp.odometer) / data.gallons);
-        $scope.currentMileage = ($scope.milesDriven / data.gallons);
+        // $scope.fuelUp = {
+        //     miles: $scope.miles,
+        //     mpg: $scope.mpg,
+        //     fuelUpCost: $scope.fuelUpCost
+        // };
 
-        $scope.fuelUpCost = (data.gallons * data.price);
+        // console.log($scope.fuelUp);
+        $scope.save();
+    };
 
+
+    // mongolabResourceHttp Stuff
+    var changeSuccess = function() {
+        $location.path('/FuelUpsList');
+    };
+
+    var changeError = function() {
+        throw new Error('Sth went wrong...');
+    };
+
+    $scope.save = function(){
+        $scope.fuelUp.$save(changeSuccess, changeSuccess, changeError, changeError);
+    };
+
+    $scope.abandonChanges = function() {
+        $location.path("/FuelUpsList");
+    };
+
+    $scope.hasChanges = function(){
+        return !angular.equals($scope.fuelUp);
     };
 
 
